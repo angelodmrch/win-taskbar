@@ -1,0 +1,71 @@
+#!/bin/sh
+# Runs after the package is installed or upgraded. GNOME on Wayland only
+# loads extension code at login, so turn the extension on for everyone who
+# is logged in and ask them to log out and back in.
+set -e
+
+UUID="win-taskbar@angelo"
+[ "$1" = "configure" ] || exit 0
+
+if [ -n "$2" ]; then
+    TITLE="Win Taskbar was updated"
+else
+    TITLE="Win Taskbar was installed"
+fi
+
+# Prints the enabled-extensions value with our UUID added, or nothing if it is already there.
+with_uuid() {
+    case "$1" in
+        *"'$UUID'"*) ;;
+        "@as []"|"[]"|"") echo "['$UUID']" ;;
+        *) echo "$1" | sed "s/]\$/, '$UUID']/" ;;
+    esac
+}
+
+notify_user() {
+    user="$1" uid="$2" home="$3"
+    bus="/run/user/$uid/bus"
+    run() {
+        runuser -u "$user" -- env DBUS_SESSION_BUS_ADDRESS="unix:path=$bus" \
+            XDG_RUNTIME_DIR="/run/user/$uid" "$@"
+    }
+
+    current="$(run gsettings get org.gnome.shell enabled-extensions 2>/dev/null || true)"
+    updated="$(with_uuid "$current")"
+    [ -z "$updated" ] || run gsettings set org.gnome.shell enabled-extensions "$updated" 2>/dev/null || true
+
+    body="Log out and back in to start using it. Your open apps will be closed, so save your work first."
+    if [ -d "$home/.local/share/gnome-shell/extensions/$UUID" ]; then
+        body="$body Also remove the old copy first: rm -rf ~/.local/share/gnome-shell/extensions/$UUID"
+    fi
+
+    # In the background so apt does not wait for the user to answer.
+    run sh -c '
+        choice="$(notify-send --app-name="Win Taskbar" --icon=preferences-desktop --urgency=critical \
+            --wait --action=logout="Log out now" --action=later="Later" "$1" "$2")" ||
+            notify-send --app-name="Win Taskbar" --icon=preferences-desktop --urgency=critical "$1" "$2"
+        if [ "$choice" = logout ]; then
+            gnome-session-quit --logout
+        fi
+    ' sh "$TITLE" "$body" </dev/null >/dev/null 2>&1 &
+}
+
+for bus in /run/user/*/bus; do
+    [ -S "$bus" ] || continue
+    uid="$(basename "$(dirname "$bus")")"
+    pgrep -u "$uid" -x gnome-shell >/dev/null 2>&1 || continue
+    entry="$(getent passwd "$uid")" || continue
+    user="$(echo "$entry" | cut -d: -f1)"
+    home="$(echo "$entry" | cut -d: -f6)"
+    notify_user "$user" "$uid" "$home" || true
+done
+
+echo ""
+echo "$TITLE."
+echo "Log out and back in to start using it."
+if [ -n "$(ls -d /home/*/.local/share/gnome-shell/extensions/$UUID 2>/dev/null)" ]; then
+    echo "An older copy installed from the zip will be used instead of this one. Remove it with:"
+    echo "    rm -rf ~/.local/share/gnome-shell/extensions/$UUID"
+fi
+echo ""
+exit 0

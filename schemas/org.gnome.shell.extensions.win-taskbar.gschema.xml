@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.win-taskbar" path="/org/gnome/shell/extensions/win-taskbar/">
+    <key name="taskbar-height" type="i">
+      <range min="36" max="72"/>
+      <default>48</default>
+      <summary>Height of the taskbar in pixels</summary>
+    </key>
+    <key name="background-opacity" type="i">
+      <range min="0" max="100"/>
+      <default>90</default>
+      <summary>Opacity of the taskbar background in percent (0 is fully see-through)</summary>
+    </key>
+    <key name="icon-size" type="i">
+      <range min="16" max="64"/>
+      <default>24</default>
+      <summary>Size of the app icons in pixels</summary>
+    </key>
+    <key name="alignment" type="s">
+      <choices>
+        <choice value="center"/>
+        <choice value="left"/>
+      </choices>
+      <default>'center'</default>
+      <summary>Where the app icons sit: center (Windows 11) or left (Windows 10)</summary>
+    </key>
+    <key name="show-start-button" type="b">
+      <default>true</default>
+      <summary>Show the Ubuntu button that opens the app grid</summary>
+    </key>
+    <key name="show-pinned-apps" type="b">
+      <default>true</default>
+      <summary>Show pinned apps that are not running</summary>
+    </key>
+    <key name="show-tray" type="b">
+      <default>true</default>
+      <summary>Show the system tray (network, sound, battery and the system menu)</summary>
+    </key>
+    <key name="tray-spacing" type="i">
+      <range min="0" max="32"/>
+      <default>0</default>
+      <summary>Space between tray icons in pixels</summary>
+    </key>
+    <key name="show-keyboard-indicator" type="b">
+      <default>true</default>
+      <summary>Show the keyboard layout indicator in the tray</summary>
+    </key>
+    <key name="show-a11y-indicator" type="b">
+      <default>true</default>
+      <summary>Show the accessibility indicator in the tray</summary>
+    </key>
+    <key name="show-app-indicators" type="b">
+      <default>true</default>
+      <summary>Show tray icons added by apps and other extensions</summary>
+    </key>
+    <key name="show-clock" type="b">
+      <default>true</default>
+      <summary>Show the clock (it also opens the calendar and notifications)</summary>
+    </key>
+    <key name="show-date" type="b">
+      <default>true</default>
+      <summary>Show the date under the time</summary>
+    </key>
+    <key name="time-format" type="s">
+      <default>''</default>
+      <summary>Time format (strftime); empty follows GNOME's 12 or 24 hour setting</summary>
+    </key>
+    <key name="date-format" type="s">
+      <default>'%x'</default>
+      <summary>Date format (strftime); %x is your region's short date</summary>
+    </key>
+    <key name="clock-font-size" type="d">
+      <range min="0" max="20"/>
+      <default>0</default>
+      <summary>Clock text size in points; 0 uses the default</summary>
+    </key>
+    <key name="show-task-view" type="b">
+      <default>true</default>
+      <summary>Show the Task View button, which opens the overview</summary>
+    </key>
+    <key name="show-desktop-button" type="b">
+      <default>true</default>
+      <summary>Show the thin Show desktop button at the right end</summary>
+    </key>
+    <key name="current-workspace-only" type="b">
+      <default>true</default>
+      <summary>Only show windows from the current workspace</summary>
+    </key>
+    <key name="hide-top-bar" type="b">
+      <default>true</default>
+      <summary>Hide GNOME's top bar (its tray and clock move to the taskbar either way)</summary>
+    </key>
+    <key name="hide-ubuntu-dock" type="b">
+      <default>true</default>
+      <summary>Turn off the Ubuntu Dock while the taskbar is on</summary>
+    </key>
+    <key name="blur" type="b">
+      <default>false</default>
+      <summary>Blur what is behind the taskbar (uses more graphics power)</summary>
+    </key>
+    <key name="app-order" type="as">
+      <default>[]</default>
+      <summary>Order of the app buttons, as dragged by the user</summary>
+    </key>
+    <key name="tray-shown" type="as">
+      <default>[]</default>
+      <summary>Tray icons always shown on the taskbar; the others go behind the ^ button</summary>
+    </key>
+    <key name="tray-known" type="as">
+      <default>[]</default>
+      <summary>Tray icons seen so far (id, tab, name), listed in the settings window</summary>
+    </key>
+    <key name="docks-to-restore" type="as">
+      <default>[]</default>
+      <summary>Docks this extension turned off, to turn back on when it is disabled</summary>
+    </key>
+  </schema>
+</schemalist>

@@ -1,0 +1,151 @@
+/* ---- Taskbar ---------------------------------------------------------- */
+
+.wtb-taskbar {
+  background-color: rgba(30, 30, 34, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #f3f3f3;
+  font-size: 10pt;
+}
+
+.wtb-left, .wtb-center { padding: 0 4px; }
+.wtb-tasks, .wtb-apps { spacing: 2px; }
+.wtb-right { spacing: 2px; padding-left: 6px; }
+
+.wtb-button {
+  margin: 4px 0;
+  border-radius: 6px;
+  color: #f3f3f3;
+  transition-duration: 120ms;
+}
+.wtb-button:hover { background-color: rgba(255, 255, 255, 0.08); }
+.wtb-button:active, .wtb-button:checked { background-color: rgba(255, 255, 255, 0.05); }
+.wtb-button:focus { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4); }
+
+/* Ubuntu button */
+.wtb-start-button:checked { background-color: rgba(255, 255, 255, 0.11); }
+
+/* App buttons: plain until running; the app in front gets a rounded
+   highlight, like the Ubuntu Dock. */
+.wtb-apps { spacing: 4px; }
+.wtb-button { border-radius: 10px; }
+.wtb-app.focused { background-color: rgba(255, 255, 255, 0.14); }
+.wtb-app.focused:hover { background-color: rgba(255, 255, 255, 0.18); }
+.wtb-app.urgent { background-color: rgba(255, 150, 40, 0.3); }
+.wtb-dots { spacing: 3px; margin-bottom: 2px; }
+
+/* Divider between pinned and unpinned apps */
+.wtb-separator {
+  background-color: rgba(255, 255, 255, 0.22);
+  margin: 0 4px;
+}
+
+/* Tray: indicators moved down from the top bar */
+.wtb-tray { spacing: 0; }
+.wtb-taskbar .panel-button {
+  margin: 4px 1px;
+  padding: 0 8px;
+  border-radius: 6px;
+  color: #f3f3f3;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  -natural-hpadding: 8px;
+  -minimum-hpadding: 4px;
+  transition-duration: 120ms;
+}
+.wtb-taskbar .panel-button:hover { background-color: rgba(255, 255, 255, 0.08); }
+.wtb-taskbar .panel-button:active,
+.wtb-taskbar .panel-button:checked,
+.wtb-taskbar .panel-button:focus { background-color: rgba(255, 255, 255, 0.12); }
+.wtb-taskbar .panel-button .system-status-icon,
+.wtb-taskbar .panel-button .app-menu-icon { icon-size: 16px; padding: 0 3px; color: #f3f3f3; }
+.wtb-taskbar .panel-button StIcon { color: #f3f3f3; }
+
+/* Clock */
+.wtb-clock { padding: 0 2px; spacing: 0; font-size: 9pt; }
+.wtb-clock-time, .wtb-clock-date { font-feature-settings: "tnum"; text-align: center; }
+.wtb-taskbar .wtb-clock-button .clock-display-box { spacing: 6px; }
+
+/* Show desktop: a thin strip at the far right */
+.wtb-show-desktop {
+  width: 8px;
+  margin-left: 4px;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+.wtb-show-desktop:hover { background-color: rgba(255, 255, 255, 0.08); }
+
+/* Right-click menu on app buttons */
+.wtb-app-menu .popup-menu-content { border-radius: 10px; }
+
+/* ---- Window previews ------------------------------------------------ */
+
+.wtb-previews {
+  background-color: rgba(36, 36, 40, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 6px;
+  spacing: 6px;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45);
+  color: #f3f3f3;
+}
+.wtb-previews.tooltip { padding: 5px 10px; border-radius: 6px; }
+.wtb-tooltip { font-size: 9.5pt; }
+
+.wtb-preview {
+  border-radius: 8px;
+  padding: 4px;
+  spacing: 4px;
+}
+.wtb-preview:hover, .wtb-preview:checked { background-color: rgba(255, 255, 255, 0.08); }
+.wtb-preview-header { spacing: 4px; }
+.wtb-preview-title-box { spacing: 6px; padding: 2px 4px; }
+.wtb-preview-title { font-size: 9pt; max-width: 170px; }
+.wtb-preview-title-button { border-radius: 6px; text-align: left; }
+.wtb-preview-close {
+  padding: 4px;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.7);
+}
+.wtb-preview-close:hover { background-color: #c42b1c; color: #ffffff; }
+.wtb-preview-thumb-button { border-radius: 6px; }
+
+/* Drag and drop: the gap where an app from the app grid will land */
+.wtb-placeholder {
+  margin: 6px 2px;
+  border-radius: 6px;
+  border: 1px dashed rgba(255, 255, 255, 0.35);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Hidden tray icons */
+.wtb-chevron { padding: 0 6px; margin: 4px 1px; }
+.wtb-overflow {
+  background-color: rgba(36, 36, 40, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 6px;
+  spacing: 6px;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45);
+  color: #f3f3f3;
+}
+.wtb-overflow-grid { spacing: 2px; }
+.wtb-overflow-row { spacing: 2px; }
+.wtb-overflow .panel-button {
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0 6px;
+  border-radius: 6px;
+  color: #f3f3f3;
+  background-color: transparent;
+}
+.wtb-overflow .panel-button:hover { background-color: rgba(255, 255, 255, 0.1); }
+.wtb-overflow .panel-button:active,
+.wtb-overflow .panel-button:checked { background-color: rgba(255, 255, 255, 0.14); }
+.wtb-overflow .panel-button .system-status-icon { icon-size: 16px; color: #f3f3f3; }
+.wtb-overflow-settings {
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 9pt;
+  color: rgba(255, 255, 255, 0.7);
+}
+.wtb-overflow-settings:hover { background-color: rgba(255, 255, 255, 0.08); color: #ffffff; }

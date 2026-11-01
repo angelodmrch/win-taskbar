@@ -1,0 +1,10 @@
+{
+  "uuid": "win-taskbar@angelo",
+  "name": "Win Taskbar",
+  "description": "A Windows-style taskbar at the bottom of the screen: an Ubuntu button that opens the app grid, pinned and running apps with window previews, the system tray, and a clock with the calendar and notifications.",
+  "shell-version": ["45", "46", "47", "48", "49", "50"],
+  "session-modes": ["user"],
+  "settings-schema": "org.gnome.shell.extensions.win-taskbar",
+  "url": "",
+  "version": 7
+}
